@@ -45,7 +45,7 @@ Example stochastic programs are in directory =|slp|= and example run scripts are
 
 Licence
 ---
-This software can be distributed under the MIT licence
+This software is distributed under the MIT licence.
 
 ## Installation and testing ...
 
@@ -62,7 +62,9 @@ main.
 
 ### ... on Yap
 
-Download latest sources from http://stoics.org.uk/~nicos/sware/pepl
+Download latest sources from http://stoics.org.uk/~nicos/sware/pepl <br>
+or https://github.com/nicos-angelopoulos/pepl
+
 == 
 gunzip pepl-*tgz
 tar xf pepl-*tar
