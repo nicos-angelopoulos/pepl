@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%HMM from page 54 of Durbin et al
+
+%directly as stochastic regular grammar
+%doesn't bring out independence of emission and transition pys
+
+6/10 :: s --> fair.    %initial 
+4/10 :: s --> loaded.  %probabilities
+
+ 9/100 :: loaded --> [1], loaded. %1/10 * 9/10
+ 9/100 :: loaded --> [2], loaded.
+ 9/100 :: loaded --> [3], loaded.
+ 9/100 :: loaded --> [4], loaded.
+ 9/100 :: loaded --> [5], loaded.
+45/100 :: loaded --> [6], loaded.
+ 1/100 :: loaded --> [1], fair.
+ 1/100 :: loaded --> [2], fair.
+ 1/100 :: loaded --> [3], fair.
+ 1/100 :: loaded --> [4], fair.
+ 1/100 :: loaded --> [5], fair.
+ 5/100 :: loaded --> [6], fair.
+
+ 1/120 :: fair --> [1], loaded. %1/6 * 1/20
+ 1/120 :: fair --> [2], loaded.
+ 1/120 :: fair --> [3], loaded.
+ 1/120 :: fair --> [4], loaded.
+ 1/120 :: fair --> [5], loaded.
+ 1/120 :: fair --> [6], loaded.
+19/120 :: fair --> [1], fair.  %1/6 * 19/20
+19/120 :: fair --> [2], fair.
+19/120 :: fair --> [3], fair.
+19/120 :: fair --> [4], fair.
+19/120 :: fair --> [5], fair.
+19/120 :: fair --> [6], fair.

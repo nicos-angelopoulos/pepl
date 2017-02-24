@@ -1,0 +1,10 @@
+% 
+% The simplest SLP program implementing unbiased coin tosses.
+%
+0.5 :: coin( head ).
+0.5 :: coin( tail ).
+
+/*
+	fam( [slp(coin),data([coin(head)-3,coin(tail)-2]),termin([ll_e(1.0E-16)]) ] ).
+	also see the sampling in pack(mlu)
+*/

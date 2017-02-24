@@ -1,0 +1,16 @@
+% This is a with failures version of a Prism example program.
+% In comparison to coin.slp this takes much longer to converge
+% due to failures.
+% Nicos, Nov2003.
+%
+direction( left ) :-
+	coin_toss( head ).
+direction( right ) :-
+	coin_toss( tail ).
+
+0.5 :: coin_toss( head ).
+0.5 :: coin_toss( tail ).
+
+/*
+	fam( [slp(coin_w_failure),data([direction(left)-3,direction(right)-2]), termin([ll_e(1.0E-16)])] ).
+*/

@@ -1,0 +1,32 @@
+%HMM from page 54 of Durbin et al
+
+%like regular grammar with epsilon emissions
+%using intermediate nonterminals as is suggested on page 234 of Durbin et al
+
+'0.6' :: s --> fair.    %initial 
+'0.4' :: s --> loaded.  %probabilities
+
+'1' :: loaded --> loaded_emit, loaded_tran.
+'1' :: fair -->   fair_emit,   fair_tran.
+
+'0.1' :: loaded_emit --> [1].
+'0.1' :: loaded_emit --> [2].
+'0.1' :: loaded_emit --> [3].
+'0.1' :: loaded_emit --> [4].
+'0.1' :: loaded_emit --> [5].
+'0.5' :: loaded_emit --> [6].
+
+'0.1667' :: fair_emit --> [1].
+'0.1667' :: fair_emit --> [2].
+'0.1667' :: fair_emit --> [3].
+'0.1667' :: fair_emit --> [4].
+'0.1667' :: fair_emit --> [5].
+'0.1667' :: fair_emit --> [6].
+
+'0.8' :: loaded_tran --> loaded.
+'0.1' :: loaded_tran --> fair.
+'0.1' :: loaded_tran --> [].
+
+'0.05'  :: fair_tran --> loaded.
+'0.85' :: fair_tran --> fair.
+'0.1' :: fair_tran --> [].

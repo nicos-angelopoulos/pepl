@@ -1,0 +1,13 @@
+% this is the SLP version of a Prism program
+% in their doc distribution directory.
+%
+direction( D ) :-
+	coin_toss( Coin ),
+	( Coin == head -> D = left ; D = right ).
+
+0.5 :: coin_toss( head ).
+0.5 :: coin_toss( tail ).
+
+/*
+	fam( [slp(coin),data([direction(left)-3,direction(right)-2]),termin([ll_e(1.0E-16)]) ] ).
+*/

@@ -1,0 +1,20 @@
+2.1 @ 2017/02/24     Added license (MIT) and uploaded to github.
+        -            Added pepl_citation/2, with the PLP paper details.
+                     Version numberss from now on will follow the 2 part 
+							stoics convention.
+							Fixed broken translation of A->B;C in sources (particularly non stochastic clauses).
+							Added simple coin slp.
+
+2.0.6   2014/01/28   Minor corrections to docs and website.
+                     Changed operator's :: priority to 600 for compatible with 
+							logtalk. Needs to be confirmed by Paulo Moura.
+							Some corrections to examples/turtles/.
+
+2.0.4   2014/01/27   2.0.2 did n't have all required files 
+                     (sym links in src/ were all missing).    Paulo Moura
+
+2.0.2   2014/01/26   removed email from Readme.txt which showed on Swi website.
+
+2.0.0   2014/01/26   publish as Swi pack. Also tested on dev. Yap
+
+1.0.0   ???          first public version for Yap and Sicstus.

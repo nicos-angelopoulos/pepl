@@ -1,0 +1,45 @@
+bloodtype(a):- genotype(a,a); genotype(a,o); genotype(o,a).
+bloodtype(b):- genotype(b,b); genotype(b,o); genotype(o,b).
+bloodtype(o):- genotype(o,o).
+bloodtype(ab):- genotype(a,b); genotype(b,a).
+genotype(X,Y):- gene(X),gene(Y).
+1/3 :: gene( a ).
+1/3 :: gene( b ).
+1/3 :: gene( o ).
+
+/* 
+data freqs are : bt(a)-4,bt(b)-2,bt(o)-3,bt(ab)-1
+
+% sampling (1000 times).
+% 5 iterations, 
+% 6:0.35822068965517239736      ,
+% 7:0.23104338153503892195
+% 8:0.41073592880978859743
+
+50 iterations
+6:0.41693805130284905536      ,
+7:0.17947609523195043324
+8:0.40358585346520048365
+
+sampling 10000 times
+50 iterations
+6:0.42532451110407448747      ,
+7:0.17608850708539180996
+8:0.39858698181053364706
+  [/100000, bt(a)-11076,bt(b)-3227,bt(o)-4133,bt(ab)-3522]
+
+
+exact 
+5 iterations
+6:0.29235700720492091564      ,       7:0.16302659921108761387
+  8:0.54461639358399160926
+  [/100000, bt(a)-8730,bt(b)-4826,bt(o)-7545,bt(ab)-2363]
+
+Goal = bloodtype(A),
+experiment( [times(100000),clause( 
+		scall(Goal,-inf,sample,Path,Succ,_Prb),Goal-Succ-Path),
+		  file('/dev/null'),filemode(append),rand(none,n,n),
+		  observables( Obs ) ], _Res ),
+list_frequency( Obs, Freqs ), dbg_ls( freqs, Freqs ).
+
+*/

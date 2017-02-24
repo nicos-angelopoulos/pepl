@@ -1,0 +1,49 @@
+% From jc@cs.york.ac.uk Wed Feb  7 10:03:12 2001
+% Date: Wed, 7 Feb 2001 10:02:19 GMT
+% From: jc@cs.york.ac.uk
+% To: nicos@cs.york.ac.uk
+
+:- use_module(library(ugraphs)).
+
+% Definition of what a Bayes net is...
+
+bn([],[]).
+bn([RV|RVs],BN) :-                       %it's a Bayes net if
+	bn(RVs,TailBN),                  %this is and ..
+	connect(RV,RVs,TailBN,BN),       %we connect RV thus giving BN ...
+	no_cycle_introduced(RV,BN).      %and this did not introduce a cycle.
+
+connect(RV,RVs,TailBN,BN) :-
+	choose_edges(RVs,RV,Edges),  %pbc choice
+	add_edges(TailBN,Edges,BN).  %from library
+
+choose_edges(RVs,RV,Edges) :-
+	(RVs=[] ->
+	    Edges=[];
+	    choose_edges1(RVs,RV,Edges)
+	).
+
+% first decide whether RV is a child of H with choose_edges1
+% and then decide whether H is a child of RV with choose_edges2
+
+% can optimise and make more messy!
+
+
+0.5 :: choose_edges1([H|T],RV,[H-RV|Rest]) :-   %RV child of H ...
+	choose_edges3([H|T],RV,Rest).
+0.5 :: choose_edges1(RVs,RV,Rest) :-            %... or not
+	choose_edges2(RVs,RV,Rest).
+
+0.5 :: choose_edges2([H|T],RV,[RV-H|Rest]) :-  %RV parent of H
+	choose_edges(T,RV,Rest).
+0.5 :: choose_edges2([_H|T],RV,Rest) :-        % ... or not
+	choose_edges(T,RV,Rest).
+
+0.5 :: choose_edges3(_,_,_) :-                 %RV parent of H
+	fail.
+0.5 :: choose_edges3([_H|T],RV,Rest) :-        % ... or not
+	choose_edges(T,RV,Rest).
+
+%this could be more efficient
+no_cycle_introduced(_RV,BN) :-         %no cycles if there is a top sort
+	top_sort(BN,_).                %from library

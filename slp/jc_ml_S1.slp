@@ -1,0 +1,10 @@
+'0.5':: s(X,p) :- p(X), p(X).
+'0.5':: s(X,q) :- q(X).
+'0.5':: p(a).
+'0.5':: p(b).
+'0.5':: q(a).
+'0.5':: q(b).
+
+% the true labels for [s(a,p)-4,s(a,q)-3,s(b,p)-2,s(b,q)-3]
+% as worked outed manually in the ML paper by James Cussens (p259-61) are
+% .6602 .3398 .5858 .4142 .5 .5

@@ -1,0 +1,42 @@
+Process prolog finished
+SICStus 3.10.1 (x86-linux-glibc2.2): Fri Apr 11 19:15:45 CEST 2003
+Licensed to informatik.uni-freiburg.de
+| ?- yes
+% source_info
+| ?- [pe].
+% consulting /home/torge/programs/prolog/fam/pe-0_0_9/pe.pl...
+%  consulting /home/torge/programs/prolog/fam/pe-0_0_9/src/init_lib.pl...
+%   consulting /home/torge/programs/prolog/fam/pe-0_0_9/src/lib/pl.pl...
+%    loading /usr/local/sicstus3.10.1/lib/sicstus-3.10.1/library/lists.po...
+%    module lists imported into user
+%    loaded /usr/local/sicstus3.10.1/lib/sicstus-3.10.1/library/lists.po in module lists, 0 msec 13632 bytes
+%   consulted /home/torge/programs/prolog/fam/pe-0_0_9/src/lib/pl.pl in module user, 10 msec 18504 bytes
+%   consulting /home/torge/programs/prolog/fam/pe-0_0_9/src/lib/portray_no_compile.pl...
+yes
+% source_info
+| ?- sload(turtles).
+yes
+% source_info
+| ?-  ['slp/turtles_data'].
+yes
+% source_info
+| ?- frequencies(X).
+X = [sentence([a,turtle,sleeps],[])-5,sentence([the,turtle,sleeps],[])-3,sentence([the,turtles,sleep],[])-2] ? ;
+no
+% source_info
+spy( new_params/3 ).
+spy( count_sample_goals/5 ).
+
+| ?- fam([]).
+Initial parameters.
+1.0:1.00000000000000000000,	2.0:1.00000000000000000000
+3.0:1.00000000000000000000,	4.0:0.33333333333333331483
+5.0:0.33333333333333331483,	6.0:0.33333333333333331483
+7.0:0.50000000000000000000,	8.0:0.50000000000000000000
+9.0:0.50000000000000000000,	10.0:0.50000000000000000000
+11.0:1.00000000000000000000
+log_likelihood(-10.986122886681098)
+
+% Execution aborted
+% source_info
+| ?- couldnt_find_key(1)

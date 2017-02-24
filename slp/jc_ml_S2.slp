@@ -1,0 +1,14 @@
+/* 
+From James Cussens' ML paper.
+
+example call
+fam( [goal(s(_A)),data([s(a)-7,s(b)-5]),
+      count(exact),termin([iter(5)]),slp(jc_ml_S2) ] ).
+*/
+
+'0.5':: s(X) :- p(X), p(X).
+'0.5':: s(X) :- q(X).
+'0.5':: p(a).
+'0.5':: p(b).
+'0.5':: q(a).
+'0.5':: q(b).

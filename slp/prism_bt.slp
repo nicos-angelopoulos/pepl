@@ -1,0 +1,18 @@
+bloodtype(a):- genotype(a,a).
+bloodtype(a):- genotype(a,o).
+bloodtype(a):- genotype(o,a).
+bloodtype(b):- genotype(b,b).
+bloodtype(b):- genotype(b,o).
+bloodtype(b):- genotype(o,b).
+bloodtype(o):- genotype(o,o).
+bloodtype(ab):- genotype(a,b).
+bloodtype(ab):- genotype(b,a).
+genotype(X,Y):- gene(X),gene(Y).
+1/3 :: gene( a ).
+1/3 :: gene( b ).
+1/3 :: gene( o ).
+
+% scall( bloodtype(a), -inf, all, P, S, B ).
+% 11:0.32335426935919853175
+% 12:0.22154398974640665543
+% 13:0.45510174089439470180

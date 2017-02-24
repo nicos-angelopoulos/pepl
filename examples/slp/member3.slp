@@ -1,0 +1,16 @@
+/** member3( Elem, List ).
+
+Demonstrating the limitation of recursion in SLPs.
+
+*/
+1/3 :: member3( H, [H|T] ).
+2/3 :: member3( Elem, [_H|T] ) :-
+	member3( Elem, T ).
+
+
+/*
+?- lib( mlu ).
+?- sload_pe( member3 ).
+?- mlu_sample( scall(member(X,[a,b,c])), 100, X, Freqs ).
+?- mlu_sample( scall(member3(X,[a,b,c,e,d,f,g,h,i,j,k,l])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot)] ).
+*/

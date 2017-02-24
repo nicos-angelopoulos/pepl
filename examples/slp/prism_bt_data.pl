@@ -1,0 +1,10 @@
+bloodtype( a ).
+bloodtype( ab ).
+bloodtype( o ).
+bloodtype( b ).
+bloodtype( a ).
+bloodtype( o ).
+bloodtype( o ).
+bloodtype( a ).
+bloodtype( a ).
+bloodtype( b ).

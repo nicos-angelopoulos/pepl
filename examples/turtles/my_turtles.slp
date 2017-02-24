@@ -1,0 +1,24 @@
+% turtleslp(
+%	  [mySLPClause( sentence(A,B), [noun_phrase(N,A,C), verb_phrase(N,C,B)],1.0),
+%	   mySLPClause( noun_phrase(N,A,B), [article(N,A,C), noun(N,C,B)],1.0),
+%	   mySLPClause( verb_phrase(N,A,B), [intransitive_verb(N,A,B)],1.0),
+%	   mySLPClause( article(singular,A,B), ['C'(A,a,B)],0.1),
+%	   mySLPClause( article(singular,A,B), ['C'(A,the,B)],0.1),
+%	   mySLPClause( article(plural,A,B), ['C'(A,the,B)],0.8),
+%	   mySLPClause( noun(singular,A,B), ['C'(A,turtle,B)],0.9),
+%	   mySLPClause( noun(plural,A,B), ['C'(A,turtles,B)],0.1),
+%	   mySLPClause( intransitive_verb(singular,A,B), ['C'(A,sleeps,B)],0.9),
+%	   mySLPClause( intransitive_verb(plural,A,B), ['C'(A,sleep,B)],0.1)]).
+
+
+sentence(A,B) :- noun_phrase(N,A,C), verb_phrase(N,C,B).
+noun_phrase(N,A,B) :- article(N,A,C), noun(N,C,B).
+verb_phrase(N,A,B) :- intransitive_verb(N,A,B).
+'0.1':: article(singular,A,B) :- baseCase(A,a,B).
+'0.1':: article(singular,A,B) :- baseCase(A,the,B).
+'0.8':: article(plural,A,B) :- baseCase(A,the,B).
+'0.9':: noun(singular,A,B) :- baseCase(A,turtle,B).
+'0.1':: noun(plural,A,B) :- baseCase(A,turtles,B).
+'0.9':: intransitive_verb(singular,A,B) :- baseCase(A,sleeps,B).
+'0.1':: intransitive_verb(plural,A,B) :- baseCase(A,sleep,B).
+baseCase([X|A],X,A).

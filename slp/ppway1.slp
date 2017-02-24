@@ -1,0 +1,50 @@
+:- ensure_loaded( library(ordsets) ).
+:- ensure_loaded( library(lists) ).
+:- ensure_loaded( library(ord_subset_difference) ).
+
+% enzyme( '4.1.2.15', reaction_4_1_2_15, c00279, c00074 ).
+enzyme( '4.1.2.15', rea_4_1_2_15, [c00074,c00279], [c00009,c04691] ).
+enzyme( '4.6.1.3', rea_4_6_1_3, [c04691], [c00009,c00944] ).
+
+% 0.75 :: rea_4_1_2_15( yes, yes, yes, yes ).
+0.5 :: rea_4_1_2_15( yes, yes, yes, yes ).
+% 0.25 :: rea_4_1_2_15( yes, yes, no, no ).
+0.5 :: rea_4_1_2_15( yes, yes, no, no ).
+
+% 0.85 :: rea_4_6_1_3( yes, yes, yes ).
+0.5 :: rea_4_6_1_3( yes, yes, yes ).
+% 0.15 :: rea_4_6_1_3( yes, no, no ).
+0.5 :: rea_4_6_1_3( yes, no, no ).
+
+% scall( can_produce([c00074,c00279], Products), Path,Succ,Prb ).
+% sample( can_produce([c00074,c00279], Products), FlPath,Succ,Prb ).
+
+can_produce( Metabolites, Products ) :-
+	can_produce( Metabolites, [], Products ).
+
+can_produce( Metabolites, Stalled, Products ) :-
+	( possible_reaction( Metabolites, Stalled, Reaction, Ins, Outs, RestM ) ->
+		reaction_call( Reaction, Ins, Outs, Call ),
+		sif( call( s-Call ), 
+				can_produce( RestM, Stalled, Products ),
+				can_produce( Metabolites, [Reaction|Stalled], Products )
+		)
+		;
+		Products = Metabolites 
+	).
+
+possible_reaction( InMets, Stall, React, Ins, Outs, OutMets ) :-
+	enzyme( _Enz, React, Ins, Outs ),
+	\+ memberchk( React, Stall ),
+	ord_subset_difference( Ins, InMets, Diff ),
+	ord_union( Outs, Diff, OutMets ).
+
+reaction_call( Reaction, Ins, Outs, Call ) :-
+	enzyme_arg_to_reaction_args( Ins, Yins ),
+	enzyme_arg_to_reaction_args( Outs, Youts ),
+	append( Yins, Youts, Args ),
+	Call =.. [Reaction|Args].
+
+enzyme_arg_to_reaction_args( [], [] ).
+enzyme_arg_to_reaction_args( [_H|T], [yes|Targs] ) :-
+	enzyme_arg_to_reaction_args( T, Targs ).
