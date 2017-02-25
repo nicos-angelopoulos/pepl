@@ -275,7 +275,7 @@ pepl_citation( Atom, bibtex(Type,Key,Pairs) ) :-
 %  Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day)).
 %
 % pepl_version( 2:0:6, date(2014,1,28) ).
-pepl_version( 2:1, date(2017,2,25) ).
+pepl_version( 2:1:0, date(2017,2,25) ).
 
 there_exists_mem_slp_with_datafile( DataFile ) :-
 	( bb_get( current_slp, Cslp ) -> 
