@@ -34,7 +34,7 @@
 
 :- license( mit ).
 
-/** <module> pepl An implementation of the FAM algorithm.
+/** <module> An implementation of the FAM algorithm.
 
 Pepl is an implemention of the failure adjusted (FAM) algorithm which does 
 parameter estimation (PE) of the probability labels of stochastic logic programs (SLPs).
@@ -79,7 +79,7 @@ main.
 
 @author Nicos Angelopoulos
 @license This software is distributed under the MIT licence
-@version 2.1, 2016/09/01
+@version 2.1, 2017/2/25
 @version 2.0.6, 2014/01/28 
 @see  the user guide at pack('pepl/doc/pepl-user_guide.pdf').
 @see James Cussens. Parameter estimation in stochastic logic programs. Machine Learning, 44(3):245-271, 2001. ftp://ftp.cs.york.ac.uk/pub/aig/Papers/james.cussens/jcslpmlj.pdf
@@ -274,7 +274,8 @@ pepl_citation( Atom, bibtex(Type,Key,Pairs) ) :-
 %
 %  Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day)).
 %
-pepl_version( 2:0:6, date(2014,1,28) ).
+% pepl_version( 2:0:6, date(2014,1,28) ).
+pepl_version( 2:1, date(2017,2,25) ).
 
 there_exists_mem_slp_with_datafile( DataFile ) :-
 	( bb_get( current_slp, Cslp ) -> 

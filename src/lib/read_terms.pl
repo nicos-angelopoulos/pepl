@@ -1,11 +1,6 @@
 
-:- use_module( library(os) ).
-% :- requires( os_term/2 ).
-:- use_module( library(options) ).
-% :- requires( to_list/2 ).
-
-% :- requires( file_name_extends/3 ).
-
+% slightly reduced version, with no external references
+%
 read_terms( Filename, Terms ) :-
      read_terms( Filename, Terms, [store(all)] ).
 
@@ -29,7 +24,7 @@ read_terms( Fname, Terms, Opts ) :-
 	read_terms_1( Fname, Opts, Terms ).
 
 read_terms( FnameIn, Terms, Opts ) :-
-	os_term( FnameAtom, FnameIn ),
+    with_output_to( atom(FnameAtom), FnameIn ),
 	!,
 	read_terms_1( FnameAtom, Opts, Terms ).
 read_terms( FnameIn, Terms, Opts ) :-
@@ -38,8 +33,8 @@ read_terms( FnameIn, Terms, Opts ) :-
 
 read_terms_1( Fname, Opts, Terms ) :-
      ( memberchk(match(MatchItm),Opts) ->
-          en_list( MatchItm, MatchList ),
-		requires( map_list_tail/4 ),
+          read_terms_en_list( MatchItm, MatchList ),
+		  requires( map_list_tail/4 ),
           map_list_tail( MatchList, 4, partial_call_map, Match )
           ;
           Match = []
@@ -105,3 +100,9 @@ read_stream_terms( Term, Stream, [Term|TTerms] ) :-
 	read( Stream, NxTerm ),
 	read_stream_terms( NxTerm, Stream, TTerms ).
      */
+
+read_terms_en_list( Inst, List ) :-
+    is_list( Inst ),
+    !,
+    List = Inst.
+read_terms_en_list( Inst, [Inst] ).

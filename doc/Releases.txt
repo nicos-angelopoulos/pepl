@@ -1,4 +1,4 @@
-2.1 @ 2017/02/24     Added license (MIT) and uploaded to github.
+2.1 @ 2017/02/25     Added license (MIT) and uploaded to github.
         -            Added pepl_citation/2, with the PLP paper details.
                      Version numberss from now on will follow the 2 part 
 							stoics convention.
