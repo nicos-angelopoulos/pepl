@@ -62,7 +62,7 @@ main.
 
 ### ... on Yap
 
-Download latest sources from http://stoics.org.uk/~nicos/sware/pepl <br>
+Download latest sources from http://stoics.org.uk/~nicos/sware/pepl
 or https://github.com/nicos-angelopoulos/pepl
 
 == 
