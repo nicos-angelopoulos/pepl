@@ -475,25 +475,23 @@ Produces file: real_plot.svg
 
 [[doc/html/images/real_plot.svg]]
 
-To demonstrate the inability of SLPs to operate over arbitrary length objects, 
-compare:
+To demonstrate the inability of SLPs to operate over arbitrary length objects, check:
 ==
 ?- sload_pe(member3).
 ?- lib(mlu).
 ?- set_random(seed(101)).
-?- mlu_sample( member3(X,[a,b,c]), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs([png('meb3from3.png')]),las=2] ).
+?- mlu_sample( scall(member3(X,[a,b,c])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from3'),las=2] ).
 ==
 Produces file: meb3from3.png
 
 [[doc/html/images/meb3from3.png]]
 
-
-...to: 
+...and: 
 ==
 ?- sload_pe(member3).
 ?- lib(mlu).
 ?- set_random(seed(101)).
-?- mlu_sample( member3(X,[a,b,c,d,e,f,g,h]), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs([png('meb3from8.png')]),las=2] ).
+?- mlu_sample( scall(member3(X,[a,b,c,d,e,f,g,h])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ).
 ==
 Produces file: meb3from8.png
 
@@ -516,10 +514,10 @@ This predicate  is for people interested in the iternals of pepl.
 Use at your own peril.
 
 The predicate arguments are as follows.
-     * The vanilla prolog Goal to call. 
+     * The vanilla prolog Goal to call.
      * The value of Eps(ilon) at which branches are to be considered as failures.
-     * The search Method to be used, (all for all solutions or sample for a single solution).
-     * The Path(s) of the derivation(s). 
+     * The search Method to be used, (_all_ for all solutions or _sample_ for a single solution).
+     * The Path(s) of the derivation(s).
      * A flag idicating a Succ(essful) derivation or otherwise-Succ is bound to the atom fail
        if this was a failed derivation and remains unbound otherwise.
        BrPrb the branch probability of the derivation.
@@ -528,12 +526,30 @@ The predicate arguments are as follows.
 
 See predicate main_gen/1, in examples/main_scfg.pl for example usage.
 
-You can use scall/4 to sample from an SLP. 
+You can use scall/6 to sample from an SLP. 
 
 ==
+?- sload_pe(coin).
+?- set_random(seed(101)).
+?- scall(coin(Flip), 0, sample, Path, Succ, Prb ).
+Flip = head,
+Path = [1],
+Prb = 0.5.
 ==
 
-If you also have installed 
+... or to backtrack overall paths
+
+==
+?- scall(coin(Flip), 0, all, Path, Succ, Prb ).
+Flip = head,
+Path = [1],
+Prb = 0.5 ;
+Flip = tail,
+Path = [2],
+Prb = 0.5.
+
+==
+
 
 */
 scall( Goal, Eps, Meth, Path, Succ, Prb ) :-
