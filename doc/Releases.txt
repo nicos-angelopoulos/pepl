@@ -1,6 +1,7 @@
 2.2
     @ 2022/01/01     DOC      of scall/1
                      EXAMPLE  Non failure version of member3.slp in member3_nf.slp
+                     DOC      format options of fam/1
 
 2.1 @ 2017/02/25     Added license (MIT) and uploaded to github.
         -            Added pepl_citation/2, with the PLP paper details.
