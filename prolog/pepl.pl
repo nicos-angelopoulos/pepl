@@ -79,6 +79,7 @@ main.
 
 @author Nicos Angelopoulos
 @license This software is distributed under the MIT licence
+@version 2.2, 2022/1/1
 @version 2.1, 2017/2/25
 @version 2.0.6, 2014/01/28 
 @see  the user guide at pack('pepl/doc/pepl-user_guide.pdf').
@@ -281,12 +282,12 @@ pepl_citation( Atom, bibtex(Type,Key,Pairs) ) :-
 
 
 
-%% pepl_version( -Version, Date ).
+%% pepl_version( -Version, -Date ).
 %
 %  Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day)).
 %
 % pepl_version( 2:0:6, date(2014,1,28) ).
-pepl_version( 2:1:0, date(2017,2,25) ).
+pepl_version( 2:2:0, date(2021,1,1) ).
 
 there_exists_mem_slp_with_datafile( DataFile ) :-
      ( bb_get( current_slp, Cslp ) -> 
