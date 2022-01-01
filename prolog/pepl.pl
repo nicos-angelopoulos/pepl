@@ -400,7 +400,7 @@ ssave( InFile ) :-
 
 %% sls.
 %
-%  Listiing of the stochastic program currently in memory.
+%  Listing of the stochastic program currently in memory.
 %
 sls :-
 	% bb_get( all_transformed_clauses, TrsClauses ),
@@ -442,11 +442,57 @@ sload_pe( Files, InOptions ) :-
 
 /** scall( Goal ).
 
-Sample Goal. 
+Sample (=call) Goal
 
 == 
-?- sload_pe( [pack(pepl/slp/coin] ).
+?- sload_pe(coin).
+?- set_random(seed(101)).
+?- scall(coin(Flip)).
+Flip = head.
+
+?- scall(coin(Flip)).
+Flip = tail.
 ==
+
+If you have packs: mlu, b_real and Real.
+==
+?- lib(mlu).
+?- sload_pe(coin).
+?- mlu_sample( scall(coin(Side)), 100, Side, Freqs ), 
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
+==
+Produces file: real_plot.svg
+
+[[doc/html/images/real_plot.svg]]
+
+To demonstrate the inability of SLPs to operate over arbitrary length objects, 
+compare:
+==
+?- sload_pe(member3).
+?- lib(mlu).
+?- set_random(seed(101)).
+?- mlu_sample( member3(X,[a,b,c]), 100, X, Freqs ), 
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs([png('meb3from3.png')]),las=2] ).
+==
+Produces file: meb3from3.png
+
+[[doc/html/images/meb3from3.png]]
+
+
+...to: 
+=
+?- sload_pe(member3).
+?- lib(mlu).
+?- set_random(seed(101)).
+?- mlu_sample( member3(X,[a,b,c,d,e,f,g,h]), 100, X, Freqs ), 
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs([png('meb3from8.png')]),las=2] ).
+==
+Produces file: meb3from8.png
+
+[[doc/html/images/meb3from8.png]]
+
+@see scall/6
+
 */
 scall( Goal ) :-
 	Eps is 1E-10,
@@ -473,6 +519,13 @@ The predicate arguments are as follows.
 	* BrPrb the branch probability of the derivation.
 
 See predicate main_gen/1, in examples/main_scfg.pl for example usage.
+
+You can use scall/4 to sample from an SLP. 
+
+==
+==
+
+If you also have installed 
 
 */
 scall( Goal, Eps, Meth, Path, Succ, Prb ) :-
