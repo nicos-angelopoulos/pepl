@@ -32,3 +32,9 @@ message( off_the_cliff ) -->
 
 message( off_the_rocking_horse(Hk,End) ) -->
     ['Key value of head: ~w, matched end value: ~w'-[Hk,End]].
+
+% informational
+message( sload_src(SlpF) ) -->
+    ['Sourcing SLP from: ~p'-[SlpF]].
+message( sload_file(TmpF) ) -->
+    ['Loading transformed SLP from: ~p'-[TmpF]].

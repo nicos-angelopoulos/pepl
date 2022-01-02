@@ -75,7 +75,7 @@ sload_pe_1( Files, Options, CC, Fcc ) :-
                ;
                File = Files,
                slp_file_location( File, FileName ),
-               % write( sloading(FileName) ), nl,
+               print_message( informational, pepl(sload_src(FileName)) ),
                RdOpts = [variable_names(VNms)],
                read_terms_cons( FileName, -, RdOpts, VNms, AllClausesPrv ),
                maplist( clause_parenthesis, AllClausesPrv, AllClauses ),
@@ -90,7 +90,7 @@ sload_pe_1( Files, Options, CC, Fcc ) :-
                bb_put( all_transformed_clauses, NewTrsCls ),
                file_name_extension( FileName, tmp, TmpFile ),
                portray_clauses_on( TmpFile, TrsClauses ), 
-               write( file(TmpFile) ), nl,
+               print_message( informational, pepl(sload_file(TmpFile)) ),
                load_tmp_file( TmpFile ),
                ( memberchk( keep_pl(true), Options ) ->
                     true

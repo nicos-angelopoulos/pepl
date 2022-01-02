@@ -1,4 +1,5 @@
-2.2                  @ 2022/01/01
+2.2                  @ 2022/01/02
+    @ 2022/01/02     CHANGED  reporting of loading via print_message/2
     @ 2022/01/01     DOC      of scall/1 and sprucing up scall/6
                      EXAMPLE  Non failure version of member3.slp in member3_nf.slp
                      DOC      format options of fam/1
