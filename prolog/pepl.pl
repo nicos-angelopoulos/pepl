@@ -287,8 +287,11 @@ pepl_citation( Atom, bibtex(Type,Key,Pairs) ) :-
 Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day)).
 
 ==
-?- pepl_version( 2:2:0, date(2022,1,2) ).
+?- pepl_version(V,D).
+V = 2:2:0,
+D = date(2021, 1, 1).
 ==
+
 */
 pepl_version( 2:2:0, date(2021,1,1) ).
 
