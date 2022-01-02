@@ -28,7 +28,7 @@
 :- ensure_loaded( library(lists) ).                    % append/3.
 :- ensure_loaded( library(mold_vars_list) ).           % /2.
 :- ensure_loaded( library(fam_setrand) ).              % /2.
-:- ensure_loaded( library(werr) ).                     % werrc/3.
+:- ensure_loaded( library(pepl_messages) ).            % message/3.
 
 :- dynamic( dbg_flag/1 ).
 
@@ -79,7 +79,7 @@ main.
 
 @author Nicos Angelopoulos
 @license This software is distributed under the MIT licence
-@version 2.2, 2022/1/1
+@version 2.2, 2022/1/2
 @version 2.1, 2017/2/25
 @version 2.0.6, 2014/01/28 
 @see  the user guide at pack('pepl/doc/pepl-user_guide.pdf').
@@ -282,18 +282,21 @@ pepl_citation( Atom, bibtex(Type,Key,Pairs) ) :-
 
 
 
-%% pepl_version( -Version, -Date ).
-%
-%  Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day)).
-%
-% pepl_version( 2:0:6, date(2014,1,28) ).
+/** pepl_version( -Version, -Date ).
+
+Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day)).
+
+==
+?- pepl_version( 2:2:0, date(2022,1,2) ).
+==
+*/
 pepl_version( 2:2:0, date(2021,1,1) ).
 
 there_exists_mem_slp_with_datafile( DataFile ) :-
      ( bb_get( current_slp, Cslp ) -> 
           true
           ;
-          pepl_msg( 'No SLP currently in memory' )
+          pepl_warn( nothing_in_memory )
      ),
      ( file_name_extension(Stem,slp,Cslp) -> true; Stem=Cslp ),
      % fname_stem( Cslp, ".slp", Stem, _FullExt ),
@@ -313,7 +316,7 @@ frequencies_to_top_goal_1( [H-_Hocc|T], Goal ) :-
      ( \+ \+ Goal = H -> 
           true
           ;
-          pepl_msg( ['Skipping incompatible datum ',Goal,' and ', H] )
+          pepl_warn( skipping_datum(Goal,H) )
      ),
      frequencies_to_top_goal_1( T, Goal ).
 
@@ -334,7 +337,7 @@ check_data( Data ) :-
      ( Inner == [] ->
           true
           ;
-          pepl_msg( data_format_error(Inner) )
+          pepl_warn( data_format_error(Inner) )
      ).
 
 check_data_1( [] ).
@@ -350,26 +353,6 @@ sload_in_fam_options( [H|T], SldOpts ) :-
           SldOpts = [H|TSldOpts]
      ),
      sload_in_fam_options( T, TSldOpts ).
-
-pepl_msg( Msg ) :-
-     werrc( Msg, err, abort ).
-
-pepl_msg( Msg, Pfx ) :-
-     werrc( Msg, Pfx, abort ).
-
-pepl_msg( PrvMsg, PrvPfx, Call ) :-
-     ( is_list(PrvMsg) -> Msg = PrvMsg ; Msg = [PrvMsg] ),
-     ( PrvPfx == warn ->
-          Pfx = 'Pepl Warning: '
-          ;
-          ( PrvPfx == err -> Pfx = 'Pepl Error: '
-               ;
-               PrvPfx = Pfx
-          )
-     ),
-     werrc( Msg, Pfx, Call ).
-
-
 
 %% ssave( +File ).
 %
@@ -445,7 +428,7 @@ sload_pe( Files, InOptions ) :-
           ( AddMode == write ->
                clean_slp_module
                ;
-               pepl_msg( improper_add_mode_option(AddMode,in(sload_pe/2)) )
+               pepl_warn( add_mode_opt(AddMode) )
           )
      ),
      sload_pe_1( Files, Opts1, 1, CC ),
