@@ -96,7 +96,7 @@ sample( Goal ) :-
      Succ \== fail,
      Prb =\= 0.
 
-/** sample(+Goal, +Eps, -Path, -Succ, -Prb ).
+/** sample(+Goal, +Eps, -Path, -Succ, -Prb).
 
 True iff Goal is a stochastic goal that can be sampled from the stachastic clauses in memory.
 
