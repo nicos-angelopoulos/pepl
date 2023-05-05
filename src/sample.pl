@@ -116,7 +116,6 @@ Path = [1],
 Prb = 0.5.
 ==
 
-
 The probability with which refutations/branches are sampled are proportional to the probabilities on the
 clauses. That is, sampling replaces SLD resolution with stochastic resolution.
 
