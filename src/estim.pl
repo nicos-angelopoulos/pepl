@@ -1,22 +1,18 @@
-:- ensure_loaded( myoption ).							% /5, option_sel/5.
-:- ensure_loaded( library(lists) ).
-	% select/3, memberchk/2, append/3.
-:- ensure_loaded( library(ordsets) ).
-	% list_to_ord_set/2, ord_union/3.
-:- ensure_loaded( library(flatten_nv) ).
-:- ensure_loaded( library(kv_write_long_list) ).			% /4.
-:- ensure_loaded( library(kv_sum_vs) ).				     % /2,3.
-:- ensure_loaded( library(kvsi_merge_w_add) ).			% /3.
-:- ensure_loaded( library(kvis_val_left_incl) ).			% /4.
-:- ensure_loaded( library(kv_replace_first_vals_w_rem) ).	% /4.
-:- ensure_loaded( library(kv_div_vs_by) ).				% /3.
-:- ensure_loaded( library(kv_multi_vs_by) ).				% /3.
-:- ensure_loaded( library(kv_decompose) ).				% /3.
-:- ensure_loaded( library(div_all_to_prbs) ).			% /3.
-:- ensure_loaded( library(list_to_equiprbl) ).			% /3.
-:- ensure_loaded( library(list_frequency) ).				% /2.
-:- ensure_loaded( library(simplify_mults_in_quotient) ).	% /3.
-:- ensure_loaded( library(fam_setrand) ).				% /2.
+:- ensure_loaded(library(myoption)).					% /5, option_sel/5.
+:- ensure_loaded(library(flatten_nv)).
+:- ensure_loaded(library(kv_write_long_list)).			% /4.
+:- ensure_loaded(library(kv_sum_vs)).				     % /2,3.
+:- ensure_loaded(library(kvsi_merge_w_add)).			     % /3.
+:- ensure_loaded(library(kvis_val_left_incl)).			% /4.
+:- ensure_loaded(library(kv_replace_first_vals_w_rem)).	% /4.
+:- ensure_loaded(library(kv_div_vs_by)).				% /3.
+:- ensure_loaded(library(kv_multi_vs_by)).				% /3.
+:- ensure_loaded(library(kv_decompose)).				% /3.
+:- ensure_loaded(library(div_all_to_prbs)).			     % /3.
+:- ensure_loaded(library(list_to_equiprbl)).			     % /3.
+:- ensure_loaded(library(list_frequency)).				% /2.
+:- ensure_loaded(library(simplify_mults_in_quotient)).	     % /3.
+:- ensure_loaded(library(fam_setrand)).				     % /2.
 % :- ensure_loaded( library(dbg_pepl) ). % this is now in pepl.pl no need to load
 
 /*  
