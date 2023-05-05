@@ -40,15 +40,17 @@ swi_start :-
 	ensure_loaded( library(swi_compat) ).
 
 % load pack interface code
+:- ensure_loaded(pepl).                       % /1.
+:- ensure_loaded(fam).                       % /1.
 :- ensure_loaded(sample).                    % /1, /5.
 :- ensure_loaded(scall).                     % /1, /2, /5.
 :- ensure_loaded(seed_pe).                   % /0.
 
 % load some basic pack code
-:- ensure_loaded(estim).                     % /4.
-:- ensure_loaded(resolution_pe).             % /6.
-:- ensure_loaded(set_prior).                 % /1.
-:- ensure_loaded(slp_file_location).         % /2.
+:- ensure_loaded(library(estim)).            % /4.
+:- ensure_loaded(library(resolution_pe)).    % /6.
+:- ensure_loaded(library(set_prior)).        % /1.
+:- ensure_loaded(library(slp_file_location)). % /2.
 
 % load pepl.pl specifics, squirelling these away from the doc server
 %

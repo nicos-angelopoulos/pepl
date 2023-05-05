@@ -6,14 +6,14 @@
 %   of sload_pe/2.
 
 :- ensure_loaded(init_lib).                     % library/1.
-:- ensure_loaded(slp_file_location).            % /2.
-:- requires(read_terms_cons/5).
+:- ensure_loaded(library(slp_file_location)).   % /2.
+:- ensure_loaded(library(read_terms_cons)).     % /5.
 :- ensure_loaded(library(portray_clauses_on)).  % /2.
-:- ensure_loaded(library(flatten_nv)).          % flatten_nv/2
+:- ensure_loaded(library(flatten_nv)).          % flatten_nv/2.
 :- ensure_loaded(library(kvsi_till_left_incl)). % /3.
 :- ensure_loaded(library(kvsi_val_w_right_rem)).% /3.
 :- ensure_loaded(library(mold_vars_list)).      % /2.
-:- ensure_loaded(expand_sgoal).                 % 
+:- ensure_loaded(library(expand_sgoal)).        % /2, /10.
 :- ensure_loaded(library(options_cohesion)).    % /3.
 :- ensure_loaded(library(is_list_of_n_vars)).   % /2.
 

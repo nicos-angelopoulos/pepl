@@ -144,7 +144,7 @@ Prb = 0.5.
 
 @author nicos angelopoulos
 @version  0:1 2023/05/04
-@see scall/1, scall/5, scall_sum/2 and scall_sum/5 for finding the probability of refutations and goals.
+@see scall/1, scall/2, scall/5, scall_sum/2 and scall_findall/2 for finding the probability of refutations and goals.
 
 */
 sample( Goal, Eps, Path, Succ, Prb ) :-
