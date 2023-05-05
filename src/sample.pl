@@ -10,14 +10,14 @@ True iff Goal is a stochastic goal that can be refuted from the stochastic claus
 
 ==
 ?- sload_pe(coin).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(Flip)).
 Flip = head.
 ==
 
 sample(Goal) is equivalent to sample(Goal,0,_Path,Succ,Prb) where Succ is not =|fail|= and Prb is not =|0|=.
 ==
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(Flip),0,Path,Succ,Prb).
 Flip = head,
 Path = [1],

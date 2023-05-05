@@ -93,7 +93,35 @@ stochastic sampling resolution and SLD-based probabilisic inference.
 
 ### Stochastic sampling resolution
 
+These predicates allow to sample from a loaded stochastic logic program (Slp). The resolution strategy here
+are that of chosing between probabilistic choices according to their relative values. The main idea is that
+when sampling many times from a top goal will in the long run sample each derivation path in proportion 
+to the probability of the derivation. The probability of a derivation/refutation, is simply the product 
+of all the probabilities attached to resolution steps during the derivation. 
+
+
+For very deep probabilistic programs, it is sometimes useful to but a minimum value of probability
+we are interested in. This is a way to shorten the search space without losing significant amounts
+of probility mass (see second argument of sample/5).
+
+See
+  * sample/1
+  * sample/5
+
 ### SLD-based probabilisic inference
+
+These predicates allow standard SLD exploration of a stochastic query against an SLP. Predicates here
+allows to explore what is derivable and often attach a probability and ather information to each derivation.
+
+Note that in probabilistic inference we often are more interested in failures than in standard LP. 
+This is because there is a probability mass loss which each failed probabilistic branch.
+
+Probabilistic inference predicates
+  * scall/1
+  * scall/2
+  * scall/5
+  * scall_findall/2
+  * scall_sum/2
 
 ## Package information
 

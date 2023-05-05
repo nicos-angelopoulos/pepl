@@ -7,6 +7,8 @@
                      IFACE:  scall/2, adds probability of derivation 
                      CHANGE: scall_1/6 -> resolution_pe/6, now in src/resolution_pe.pl
                      CHANGE: scall/6 -> scall/5, completes separation of scall_?/N and sample/M preds
+                     CHANGE: hide some of the priate loads to init_lib
+                     DOC:    inference on module docs
 
 2.2                  @ 2022/01/02
     @ 2022/01/02     CHANGED  reporting of loading via print_message/2
