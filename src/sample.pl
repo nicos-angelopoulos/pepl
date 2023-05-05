@@ -57,6 +57,32 @@ true.
 Flip = head.
 ==
 
+To demonstrate the inability of SLPs to operate over arbitrary length objects, check:
+==
+?- sload_pe(member3).
+?- lib(mlu).
+?- seed_pe.
+?- mlu_sample( sample(member3(X,[a,b,c])), 100, X, Freqs ),
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from3'),las=2] ).
+==
+Produces file: meb3from3.png
+
+[[doc/html/images/meb3from3.png]]
+
+...and: 
+==
+?- sload_pe(member3).
+?- lib(mlu).
+?- set_random(seed(101)).
+?- mlu_sample( sample(member3(X,[a,b,c,d,e,f,g,h])), 100, X, Freqs ),
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ).
+==
+Produces file: meb3from8.png
+
+[[doc/html/images/meb3from8.png]]
+
+==
+
 @author nicos angelopoulos
 @version  0:1 2023/05/04
 @see sample/5, for full control of sampling stochastic goals

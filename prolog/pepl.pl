@@ -14,6 +14,7 @@
                    scall/2,
                    scall/5,
                    scall/6,
+                   scall_findall/2,
                    scall_sum/2,
                    seed_pe/0,
                    % all_path/2,
@@ -452,58 +453,36 @@ sload_pe( Files, InOptions ) :-
 
 /** scall( Goal ).
 
-Sample (=call) Goal
+Succeeds for all instantiations for which stochastic Goal has a successful derivation. 
 
 ==
 ?- sload_pe(coin).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- scall(coin(Flip)).
-Flip = head.
-
-?- scall(coin(Flip)).
+Flip = head ;
 Flip = tail.
-==
 
-If you have packs: mlu, b_real and Real.
+?- scall(doubles(X)).
+X = head ;
+X = tail.
 ==
-?- lib(mlu).
-?- sload_pe(coin).
-?- mlu_sample( scall(coin(Side)), 100, Side, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
-==
-Produces file: real_plot.svg
-
-[[doc/html/images/real_plot.svg]]
-
-To demonstrate the inability of SLPs to operate over arbitrary length objects, check:
-==
-?- sload_pe(member3).
-?- lib(mlu).
-?- set_random(seed(101)).
-?- mlu_sample( scall(member3(X,[a,b,c])), 100, X, Freqs ),
-   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from3'),las=2] ).
-==
-Produces file: meb3from3.png
-
-[[doc/html/images/meb3from3.png]]
-
-...and: 
-==
-?- sload_pe(member3).
-?- lib(mlu).
-?- set_random(seed(101)).
-?- mlu_sample( scall(member3(X,[a,b,c,d,e,f,g,h])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ).
-==
-Produces file: meb3from8.png
-
-[[doc/html/images/meb3from8.png]]
 
 @see scall/6
 
 */
 scall( Goal ) :-
-     Eps is 1E-10,
-     scall_1( sample, Goal, Eps, _Path, Succ, _Prb ), 
+     % Eps is 1E-10,
+     % scall_1( sample, Goal, Eps, _Path, Succ, _Prb ), 
+     scall_1( all, Goal, 0, _Path, Succ, _Prb ),
      Succ \== fail. % fixme: or false ?
+
+/*
+scall( Goal, Prb ) :-
+     % Eps is 1E-10,
+     % scall_1( sample, Goal, Eps, _Path, Succ, _Prb ), 
+     scall_1( all, Goal, 0, _Path, Succ, Prb ),
+     Succ \== fail. % fixme: or false ?
+     */
 
 scall( Goal, Path, Succ, Prb ) :-
      scall_1( all, Goal, 0, Path, Succ, Prb ). 
