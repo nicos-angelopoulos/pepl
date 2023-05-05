@@ -13,7 +13,6 @@
                    scall/1,
                    scall/2,
                    scall/5,
-                   scall/6,
                    scall_findall/2,
                    scall_sum/2,
                    seed_pe/0,
@@ -84,6 +83,14 @@ yap
 [main].
 main.
 ==
+
+## Resolution
+In addition to parameter estimation Pepl implements two way of performing resolution over SLPs:
+stochastic sampling resolution and SLD-based probabilisic inference.
+
+### Stochastic sampling resolution
+
+### SLD-based probabilisic inference
 
 ## Package information
 
@@ -452,56 +459,6 @@ sload_pe( Files, InOptions ) :-
      bb_put( current_slp, Files ).
 
 
-scall( Goal, Path, Succ, Prb ) :-
-     scall_1( all, Goal, 0, Path, Succ, Prb ). 
-
-
-/** scall( Goal, Eps, Meth, Path, Succ, Prb ).
-
-This predicate  is for people interested in the iternals of pepl.
-Use at your own peril.
-
-The predicate arguments are as follows.
-     * The vanilla prolog Goal to call.
-     * The value of Eps(ilon) at which branches are to be considered as failures.
-     * The search Method to be used, (_all_ for all solutions or _sample_ for a single solution).
-     * The Path(s) of the derivation(s).
-     * A flag idicating a Succ(essful) derivation or otherwise-Succ is bound to the atom fail
-       if this was a failed derivation and remains unbound otherwise.
-       BrPrb the branch probability of the derivation.
-       if this was a failed derivation and remains unbound otherwise.
-     * BrPrb the branch probability of the derivation.
-
-See predicate main_gen/1, in examples/main_scfg.pl for example usage.
-
-You can use scall/6 to sample from an SLP. 
-
-==
-?- sload_pe(coin).
-?- set_random(seed(101)).
-?- scall(coin(Flip), 0, sample, Path, Succ, Prb ).
-Flip = head,
-Path = [1],
-Prb = 0.5.
-==
-
-... or to backtrack overall paths
-
-==
-?- scall(coin(Flip), 0, all, Path, Succ, Prb ).
-Flip = head,
-Path = [1],
-Prb = 0.5 ;
-Flip = tail,
-Path = [2],
-Prb = 0.5.
-
-==
-
-
-*/
-scall( Goal, Eps, Meth, Path, Succ, Prb ) :-
-     scall_1( Meth, Goal, Eps, Path, Succ, Prb ).
 
 dbg_flag( off ).
 

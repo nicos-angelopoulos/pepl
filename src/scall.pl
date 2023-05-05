@@ -154,18 +154,45 @@ scall( Goal, Prb ) :-
      scall_1( all, Goal, 0, _Path, Succ, Prb ),
      Succ \== fail.
 
-scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
-     expand_sgoal( Goal, Spec, ClId, PrIn, Eps, sample, Path, Succ, Prb, ExpG ),
-     rc( top_sample, Spec, ClId, PrIn ),
-     ( call( pepl_slp:ExpG ) -> true ; Path = [ClId|_None4], Succ = fail, Prb is 0 ),
-          % added in June 2001, for case when top sampling goal
-          % is a non-stochastic one.
-     !.
+
+/** scall( +Goal, +Eps, -Path, -Succ, +Prb ).
+
+Implements SLD-based probabilistic inference.
+
+This predicate  is for people interested in the iternals of pepl.
+Use at your own peril.
+
+The predicate arguments are as follows.
+     * The vanilla prolog Goal to call.
+     * The value of Eps(ilon) at which branches are to be considered as failures.
+     * The Path of a derivation
+     * A flag idicating a Succ(essful) derivation or otherwise. Succ is bound to the atom fail
+       if this was a failed derivation and remains unbound otherwise.
+     * BrPrb the branch probability of the derivation.
+
+==
+?- sload_pe(coin).
+?- set_random(seed(101)).
+?- scall(coin(Flip), 0, sample, Path, Succ, Prb ).
+Flip = head,
+Path = [1],
+Prb = 0.5.
+==
+
+... or to backtrack overall paths
+
+==
+?- scall(coin(Flip), 0, all, Path, Succ, Prb ).
+Flip = head,
+Path = [1],
+Prb = 0.5 ;
+Flip = tail,
+Path = [2],
+Prb = 0.5.
+
+==
 
 
-
-% scall_1( all, Goal, Eps, Path, Succ, Prb ) :-
-scall_1( Other, Goal, Eps, Path, Succ, Prb ) :-
-     expand_sgoal( Goal, Spec, ClId, PrIn, Eps, Other, Path, Succ, Prb, ExpG ),
-     rc( Other, Spec, ClId, PrIn ),
-     call( pepl_slp:ExpG ).
+*/
+scall( Goal, Eps, Path, Succ, Prb ) :-
+     resolution_pe( all, Goal, Eps, Path, Succ, Prb ).

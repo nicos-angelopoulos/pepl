@@ -5,6 +5,7 @@
                      IFACE:  scall_sum/2, scall_findall/2, allow X-Goal in 1st argument
                      CHANGE: scall/1, this is now non-sampling
                      IFACE:  scall/2, adds probability of derivation 
+                     CHANGE: scall_1/6 -> resolution_pe/6, now in src/resolution_pe.pl
                      CHANGE: scall/6 -> scall/5, completes separation of scall_?/N and sample/M preds
 
 2.2                  @ 2022/01/02
