@@ -15,6 +15,7 @@
                    scall/5,
                    scall/6,
                    scall_sum/2,
+                   seed_pe/0,
                    % all_path/2,
                    op( 600, xfy, :: )
                  ] ).
@@ -29,7 +30,8 @@
 :- ensure_loaded( '../src/set_prior' ).           
 :- ensure_loaded( '../src/slp_file_location' ).        % /2.
 :- ensure_loaded( '../src/scall' ).
-:- ensure_loaded( '../src/sample' ).
+:- ensure_loaded( '../src/sample' ).     %
+:- ensure_loaded( '../src/seed_pe' ).    % /0.
 
 :- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
 :- ensure_loaded( library(lists) ).                    % append/3.
@@ -303,7 +305,7 @@ D = date(2021, 1, 1).
 @version 2:2:0 2021/01/01
 
 */
-pepl_version( 2:2:0, date(2021,1,1) ).
+pepl_version( 2:3:0, date(2023,5,5) ).
 
 there_exists_mem_slp_with_datafile( DataFile ) :-
      ( bb_get( current_slp, Cslp ) -> 
