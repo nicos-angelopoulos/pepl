@@ -1,6 +1,18 @@
+% load system libraries, used across the pack
+
+:- ensure_loaded(library(lists)).               % append/3, memberchk/2, member/2, select/3.
+:- ensure_loaded(library(random)).              % random/1
+:- ensure_loaded(library(system)).              % delete_file/1.
+
+% load pack interface code
+
+% load some basic pack code
+:- ensure_loaded(estim).
+
 :- ensure_loaded( 'lib/pl' ).
 :- ensure_loaded( 'lib/requires_minimal' ).
 :- ensure_loaded( library(lists) ).
+
 
 assert_lib_dir_if( Lib ) :-
 	( (current_predicate(user:library_directory/1),

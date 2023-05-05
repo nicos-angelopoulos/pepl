@@ -20,22 +20,18 @@
                    op( 600, xfy, :: )
                  ] ).
 
-% employs requires...
+:- ensure_loaded('../src/sload_pe').  % trick the system
 
-% :- ensure_loaded( '../src/all_path' ).
-:- ensure_loaded( '../src/init_lib' ).
-:- ensure_loaded( '../src/estim'     ).         % /4.
-:- ensure_loaded( '../src/myoption'  ).           
-:- ensure_loaded( '../src/sload_pe'  ).           
-:- ensure_loaded( '../src/set_prior' ).           
-:- ensure_loaded( '../src/slp_file_location' ).        % /2.
-:- ensure_loaded( '../src/scall' ).
-:- ensure_loaded( '../src/sample' ).     %
-:- ensure_loaded( '../src/seed_pe' ).    % /0.
-:- ensure_loaded( '../src/resolution_pe' ).    % /0.
+% :- ensure_loaded( '../src/estim'     ).         % /4.
+% :- ensure_loaded( '../src/myoption'  ).           
+% :- ensure_loaded( '../src/sload_pe'  ).           
+% :- ensure_loaded( '../src/set_prior' ).           
+% :- ensure_loaded( '../src/slp_file_location' ).        % /2.
+% :- ensure_loaded( '../src/scall' ).
+% :- ensure_loaded( '../src/sample' ).     %
+% :- ensure_loaded( '../src/seed_pe' ).    % /0.
+% :- ensure_loaded( '../src/resolution_pe' ).    % /0.
 
-% system
-:- ensure_loaded( library(lists) ).                    % append/3.
 % private
 :- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
 :- ensure_loaded( library(mold_vars_list) ).           % /2.
@@ -122,6 +118,18 @@ Probabilistic inference predicates
   * scall/5
   * scall_findall/2
   * scall_sum/2
+
+## Predicates index
+
+  * fam/1
+  * sample/1, sample/5
+  * scall/1, scall/2, scall/5
+  * scall_findall/2, scall_sum/2
+  * sload_pe/1, sload_pe/2
+  * ssave/1, sls/0
+  * seed_pe/0
+  * switch_dbg/1, dbg_pepl/1
+  * pepl_citation/2, pepl_version/2
 
 ## Package information
 
