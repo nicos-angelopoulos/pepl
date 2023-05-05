@@ -1,8 +1,8 @@
 2.3                  
     @ 2023/05/05     IFACE:  sample/1, sample/5, in new file src/sample.pl
-                     IFACE:  scall/, scall/, scall_sum/2.
                      IFACE:  seed_pe/0 in new file src/seed_pe.pl
                      SLP:    slp/doubles.slp
+                     IFACE:  scall/, scall/, scall_sum/2.
 
 2.2                  @ 2022/01/02
     @ 2022/01/02     CHANGED  reporting of loading via print_message/2

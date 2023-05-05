@@ -4,7 +4,7 @@ True iff two consequtive coin flips result on the same side.
 
 ==
 ?- sload_pe(doubles).
-?- set_random(seed(101)).
+?- seed_pe.
 
 ?- scall(doubles(Side)).
 Side = tail.
@@ -25,14 +25,31 @@ Side = head.
 If you have packs: lib, mlu, b_real and Real,
 ==
 ?- lib(mlu).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- mlu_sample( scall(doubles(Side)), 100, Side, Freqs ).
 Freqs = [fail-46, head-31, tail-23].
 
+?- seed_pe.
 ?- mlu_sample( scall(doubles(X)), 100, X, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('doubles_100'),las=2] ).
 ==
-Creates file doubles_100.png which plots the frequncies.
+Creates file doubles_100.png which plots the frequencies.
+
+To contrast, sampling with probability of derivations and goals.
+==
+?- seed_pe.
+?- sample(doubles(head)).
+false.
+
+?- scall_sum( doubles(head), Prb ).
+Prb = 0.25.
+
+?- scall_sum( doubles(tail), Prb ).
+Prb = 0.25.
+
+?- scall_sum( doubles(Side), Prb ).
+Prb = 0.5.
+==
 
 @author nicos angelopoulos
 @version  0:1 2023/05/05
