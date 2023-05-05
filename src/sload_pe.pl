@@ -5,20 +5,20 @@
 %  normalisation is optional and controllable with options
 %   of sload_pe/2.
 
-:- ensure_loaded( init_lib ).                     % library/1.
-:- ensure_loaded( slp_file_location ).            % /2.
-:- ensure_loaded( library(lists) ).               % append/3, memberchk/2, member/2, select/3.
-:- ensure_loaded( library(random) ).              % random/1
-:- requires( read_terms_cons/5 ).
-:- ensure_loaded( library(portray_clauses_on) ).  % /2.
-:- ensure_loaded( library(flatten_nv) ).          % flatten_nv/2
-:- ensure_loaded( library(kvsi_till_left_incl) ). % /3.
-:- ensure_loaded( library(kvsi_val_w_right_rem) ).% /3.
-:- ensure_loaded( library(mold_vars_list) ).      % /2.
-:- ensure_loaded( expand_sgoal ).                 % 
-:- ensure_loaded( library(system) ).              % delete_file/1.
-:- ensure_loaded( library(options_cohesion) ).    % /3.
-:- ensure_loaded( library(is_list_of_n_vars) ).   % /2.
+:- ensure_loaded(init_lib).                     % library/1.
+:- ensure_loaded(slp_file_location).            % /2.
+:- ensure_loaded(library(lists)).               % append/3, memberchk/2, member/2, select/3.
+:- ensure_loaded(library(random)).              % random/1
+:- requires(read_terms_cons/5).
+:- ensure_loaded(library(portray_clauses_on)).  % /2.
+:- ensure_loaded(library(flatten_nv)).          % flatten_nv/2
+:- ensure_loaded(library(kvsi_till_left_incl)). % /3.
+:- ensure_loaded(library(kvsi_val_w_right_rem)).% /3.
+:- ensure_loaded(library(mold_vars_list)).      % /2.
+:- ensure_loaded(expand_sgoal).                 % 
+:- ensure_loaded(library(system)).              % delete_file/1.
+:- ensure_loaded(library(options_cohesion)).    % /3.
+:- ensure_loaded(library(is_list_of_n_vars)).   % /2.
 
 portray_sdirectives( [] ).
 portray_sdirectives( [H|T] ) :-
@@ -437,23 +437,6 @@ ns_call_1( A, Eps, Sel, Pin, AllPaths, Succ, Pout ) :-
           call( Nead )
      ).
 
-scall_sum_refutations( Goal, Prb ) :-
-     findall( DrvPrb, scall_1( all,Goal,0,_Path,true,DrvPrb), DPrbs ),
-     sum_list( DPrbs, Prb ).
-
-
-scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
-     expand_sgoal( Goal, Spec, ClId, PrIn, Eps, sample, Path, Succ, Prb, ExpG ),
-     rc( top_sample, Spec, ClId, PrIn ),
-     ( call( pepl_slp:ExpG ) -> true ; Path = [ClId|_None4], Succ = fail, Prb is 0 ),
-          % added in June 2001, for case when top sampling goal
-          % is a non-stochastic one.
-     !.
-% scall_1( all, Goal, Eps, Path, Succ, Prb ) :-
-scall_1( Other, Goal, Eps, Path, Succ, Prb ) :-
-     expand_sgoal( Goal, Spec, ClId, PrIn, Eps, Other, Path, Succ, Prb, ExpG ),
-     rc( Other, Spec, ClId, PrIn ),
-     call( pepl_slp:ExpG ).
 
 body_expand( Body, Pin, Eps, Sel, Paths, Succ, Pout, Cond, ExpBody ) :-
      ( Cond == true -> 

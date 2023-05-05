@@ -1,0 +1,54 @@
+/** doubles(X).
+
+True iff two consequtive coin flips result on the same side.
+
+==
+?- sload_pe(doubles).
+?- set_random(seed(101)).
+
+?- scall(doubles(Side)).
+Side = tail.
+
+?- scall(doubles(Side)).
+false.
+
+?- scall(doubles(Side)).
+false.
+
+?- scall(doubles(Side)).
+Side = tail.
+
+?- scall(doubles(Side)).
+Side = head.
+==
+
+If you have packs: lib, mlu, b_real and Real,
+==
+?- lib(mlu).
+?- set_random(seed(101)).
+?- mlu_sample( scall(doubles(Side)), 100, Side, Freqs ).
+Freqs = [fail-46, head-31, tail-23].
+
+?- mlu_sample( scall(doubles(X)), 100, X, Freqs ),
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('doubles_100'),las=2] ).
+
+==
+
+@author nicos angelopoulos
+@version  0:1 2023/05/05
+
+*/
+1::doubles( X ) :-
+     coin( X ),
+     coin( X ).
+
+% 
+% The simplest SLP program implementing unbiased coin tosses.
+%
+0.5 :: coin( head ).
+0.5 :: coin( tail ).
+
+/*
+	fam( [slp(coin),data([coin(head)-3,coin(tail)-2]),termin([ll_e(1.0E-16)]) ] ).
+	also see the sampling in pack(mlu)
+*/

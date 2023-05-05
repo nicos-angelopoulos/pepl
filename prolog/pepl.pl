@@ -8,8 +8,13 @@
                    pepl_citation/2,
                    pepl_version/2,
                    sls/0,
+                   sample/1,
+                   sample/5,
                    scall/1,
+                   scall/2,
+                   scall/5,
                    scall/6,
+                   scall_sum/2,
                    % all_path/2,
                    op( 600, xfy, :: )
                  ] ).
@@ -23,6 +28,8 @@
 :- ensure_loaded( '../src/sload_pe'  ).           
 :- ensure_loaded( '../src/set_prior' ).           
 :- ensure_loaded( '../src/slp_file_location' ).        % /2.
+:- ensure_loaded( '../src/scall' ).
+:- ensure_loaded( '../src/sample' ).
 
 :- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
 :- ensure_loaded( library(lists) ).                    % append/3.
@@ -292,6 +299,9 @@ V = 2:2:0,
 D = date(2021, 1, 1).
 ==
 
+@version 2:3:0 2023/05/05
+@version 2:2:0 2021/01/01
+
 */
 pepl_version( 2:2:0, date(2021,1,1) ).
 
@@ -467,7 +477,8 @@ To demonstrate the inability of SLPs to operate over arbitrary length objects, c
 ?- sload_pe(member3).
 ?- lib(mlu).
 ?- set_random(seed(101)).
-?- mlu_sample( scall(member3(X,[a,b,c])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from3'),las=2] ).
+?- mlu_sample( scall(member3(X,[a,b,c])), 100, X, Freqs ),
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from3'),las=2] ).
 ==
 Produces file: meb3from3.png
 
@@ -494,6 +505,39 @@ scall( Goal ) :-
 
 scall( Goal, Path, Succ, Prb ) :-
      scall_1( all, Goal, 0, Path, Succ, Prb ). 
+
+/** scall( +Goal, -Prb ).
+
+True iff Goal is a stochastic goal and is sampled with probability Prb.
+
+Succeeds exactly once if it does. Uses scall/6, with Epsilon = 1E-10.
+
+==
+?- sload_pe(coin).
+?- set_random( seed(101) ).
+?- scall( coin(Flip), Prb ).
+Flip = head,
+Prb = 0.5.
+
+
+?- set_random( seed(101) ).
+?- scall( coin(tail), Prb ).
+false.
+
+?- set_random( seed(101) ).
+?- scall( coin(head), Prb ).
+Prb = 0.5.
+
+==
+
+@author nicos angelopoulos
+@version  0:1 2023/05/04
+
+*/
+scall( Goal, Prb ) :-
+     Eps is 1E-10,
+     scall_1( sample, Goal, Eps, _Path, Succ, Prb ),
+     Succ \== fail. % fixme: or false ?
 
 /** scall( Goal, Eps, Meth, Path, Succ, Prb ).
 
