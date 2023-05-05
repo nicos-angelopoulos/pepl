@@ -5,17 +5,6 @@
 :- ensure_loaded(library(random)).              % random/1
 :- ensure_loaded(library(system)).              % delete_file/1.
 
-% load pack interface code
-:- ensure_loaded
-
-% load some basic pack code
-:- ensure_loaded(estim).
-
-:- ensure_loaded( 'lib/pl' ).
-:- ensure_loaded( 'lib/requires_minimal' ).
-:- ensure_loaded( library(lists) ).
-
-
 assert_lib_dir_if( Lib ) :-
 	( (current_predicate(user:library_directory/1),
         % write( user_error, checking(Lib) ), nl( user_error ),
@@ -49,6 +38,28 @@ swi_start :-
 	atom_concat( Dir, '/lib/swi', LibSwi ),
 	assert_lib_dir_if( LibSwi ),
 	ensure_loaded( library(swi_compat) ).
+
+% load pack interface code
+:- ensure_loaded(sample).                    % /1, /5.
+:- ensure_loaded(scall).                     % /1, /2, /5.
+:- ensure_loaded(seed_pe).                   % /0.
+
+% load some basic pack code
+:- ensure_loaded(estim).                     % /4.
+:- ensure_loaded(resolution_pe).             % /6.
+:- ensure_loaded(set_prior).                 % /1.
+:- ensure_loaded(slp_file_location).         % /2.
+
+% load pepl.pl specifics, squirelling these away from the doc server
+%
+:- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
+:- ensure_loaded( library(mold_vars_list) ).           % /2.
+:- ensure_loaded( library(fam_setrand) ).              % /2.
+:- ensure_loaded( library(pepl_messages) ).            % message/3.
+
+:- ensure_loaded('lib/pl').
+:- ensure_loaded('lib/requires_minimal').
+:- ensure_loaded(library(lists)).
 
 :- pl( sicstus(_A), sicstus_start ).
 :- pl( yap(_A), yap_start ).

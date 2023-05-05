@@ -22,25 +22,9 @@
 
 :- ensure_loaded('../src/sload_pe').  % trick the system
 
-% :- ensure_loaded( '../src/estim'     ).         % /4.
-% :- ensure_loaded( '../src/myoption'  ).           
-% :- ensure_loaded( '../src/sload_pe'  ).           
-% :- ensure_loaded( '../src/set_prior' ).           
-% :- ensure_loaded( '../src/slp_file_location' ).        % /2.
-% :- ensure_loaded( '../src/scall' ).
-% :- ensure_loaded( '../src/sample' ).     %
-% :- ensure_loaded( '../src/seed_pe' ).    % /0.
-% :- ensure_loaded( '../src/resolution_pe' ).    % /0.
+:- dynamic(dbg_flag/1).
 
-% private
-:- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
-:- ensure_loaded( library(mold_vars_list) ).           % /2.
-:- ensure_loaded( library(fam_setrand) ).              % /2.
-:- ensure_loaded( library(pepl_messages) ).            % message/3.
-
-:- dynamic( dbg_flag/1 ).
-
-:- license( mit ).
+:- license(mit).
 
 /** <module> An implementation of the FAM algorithm.
 

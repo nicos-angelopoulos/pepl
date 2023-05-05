@@ -7,8 +7,6 @@
 
 :- ensure_loaded(init_lib).                     % library/1.
 :- ensure_loaded(slp_file_location).            % /2.
-:- ensure_loaded(library(lists)).               % append/3, memberchk/2, member/2, select/3.
-:- ensure_loaded(library(random)).              % random/1
 :- requires(read_terms_cons/5).
 :- ensure_loaded(library(portray_clauses_on)).  % /2.
 :- ensure_loaded(library(flatten_nv)).          % flatten_nv/2
@@ -16,7 +14,6 @@
 :- ensure_loaded(library(kvsi_val_w_right_rem)).% /3.
 :- ensure_loaded(library(mold_vars_list)).      % /2.
 :- ensure_loaded(expand_sgoal).                 % 
-:- ensure_loaded(library(system)).              % delete_file/1.
 :- ensure_loaded(library(options_cohesion)).    % /3.
 :- ensure_loaded(library(is_list_of_n_vars)).   % /2.
 
@@ -64,6 +61,39 @@ sload_options_defaults( [
           add_mode(write),
           keep_pl(false)
           ] ).
+
+%% sload_pe( Files ).
+%% sload_pe( Files,  Options ).
+%
+% Load an SLP to memory. If the source file has an slp extension the extension
+% may be omitted. Pepl looks in the following directories and order for the source
+% file(s). =|.|=, and =|./slp/|= while on SWI it also looks in,
+% =|pack(’pepl/slp/’)|=.
+%
+sload_pe( File ) :-
+     sload_pe( File, [] ).
+
+sload_pe( Files, InOptions ) :-
+     % bb_get( cc,  ),
+     bb_put( pp, [] ),
+     bb_put( all_slp_clauses, [] ),
+     bb_put( all_transformed_clauses, [] ),
+     bb_put( directives, [] ),
+     sload_options_defaults( DefOpts ),
+     options_cohesion( InOptions, DefOpts, Options ),
+     once( select( add_mode(AddMode), Options, Opts1 ) ),
+     ( AddMode == append ->
+          true
+          ;
+          ( AddMode == write ->
+               clean_slp_module
+               ;
+               pepl_warn( add_mode_opt(AddMode) )
+          )
+     ),
+     sload_pe_1( Files, Opts1, 1, CC ),
+     bb_put( cc, CC ),
+     bb_put( current_slp, Files ).
 
 sload_pe_1( Files, Options, CC, Fcc ) :-
      ( Files = [File|Tail] -> 
