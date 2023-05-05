@@ -32,9 +32,12 @@
 :- ensure_loaded( '../src/scall' ).
 :- ensure_loaded( '../src/sample' ).     %
 :- ensure_loaded( '../src/seed_pe' ).    % /0.
+:- ensure_loaded( '../src/resolution_pe' ).    % /0.
 
-:- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
+% system
 :- ensure_loaded( library(lists) ).                    % append/3.
+% private
+:- ensure_loaded( library(datafile_to_frequencies) ).  % /4.
 :- ensure_loaded( library(mold_vars_list) ).           % /2.
 :- ensure_loaded( library(fam_setrand) ).              % /2.
 :- ensure_loaded( library(pepl_messages) ).            % message/3.

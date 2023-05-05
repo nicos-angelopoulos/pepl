@@ -189,9 +189,7 @@ Prb = 0.5 ;
 Flip = tail,
 Path = [2],
 Prb = 0.5.
-
 ==
-
 
 */
 scall( Goal, Eps, Path, Succ, Prb ) :-
