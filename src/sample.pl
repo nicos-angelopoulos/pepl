@@ -64,6 +64,7 @@ To demonstrate the inability of SLPs to operate over arbitrary length objects, c
 ?- seed_pe.
 ?- mlu_sample( sample(member3(X,[a,b,c])), 100, X, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from3'),las=2] ).
+Freqs = [a-31, b-20, c-22, fail-27].
 ==
 Produces file: meb3from3.png
 
@@ -71,11 +72,12 @@ Produces file: meb3from3.png
 
 ...and: 
 ==
-?- sload_pe(member3).
-?- lib(mlu).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- mlu_sample( sample(member3(X,[a,b,c,d,e,f,g,h])), 100, X, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ).
+   write( freqs(Freqs) ), nl.
+
+freqs([a-34,b-16,c-22,d-5,e-9,f-6,fail-2,g-3,h-3])
 ==
 Produces file: meb3from8.png
 

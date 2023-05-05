@@ -69,6 +69,40 @@ scall_findall( GoalPrv, Freqs ) :-
      ( (GoalPrv=..[_,Rec],var(Rec)) -> Goal = GoalPrv; (GoalPrv = Rec-Goal -> true ; Rec = Goal )),
      findall( Tkn-Prb, (scall(Goal,_Path,Succ,Prb), (Succ==fail->Tkn=fail;Tkn=Rec)), Freqs ).
 
+/** scall( Goal ).
+
+Succeeds for all instantiations for which stochastic Goal has a successful derivation. 
+
+This uses standard SLD resolution so the order is as per Prolog.
+Failure paths are ignored here.
+
+==
+?- sload_pe(coin).
+?- scall(coin(Flip)).
+Flip = head ;
+Flip = tail.
+
+?- sload_pe(doubles).
+?- scall(doubles(X)).
+X = head ;
+X = tail.
+==
+
+Compare to
+==
+?- scall_findall( doubles(X), Pairs ).
+Pairs = [head-0.25, fail-0.25, fail-0.25, tail-0.25].
+==
+
+@author nicos angelopoulos
+@version  0:2 2023/05/05, this used to be sampling based
+@see scall/6 for full control
+@see scall_findall/2, scall_sum/2.
+
+*/
+scall( Goal ) :-
+     scall_1( all, Goal, 0, _Path, Succ, _Prb ),
+     Succ \== fail. % fixme: or false ?
 
 scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
      expand_sgoal( Goal, Spec, ClId, PrIn, Eps, sample, Path, Succ, Prb, ExpG ),
@@ -77,6 +111,7 @@ scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
           % added in June 2001, for case when top sampling goal
           % is a non-stochastic one.
      !.
+
 % scall_1( all, Goal, Eps, Path, Succ, Prb ) :-
 scall_1( Other, Goal, Eps, Path, Succ, Prb ) :-
      expand_sgoal( Goal, Spec, ClId, PrIn, Eps, Other, Path, Succ, Prb, ExpG ),
