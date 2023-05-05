@@ -96,8 +96,6 @@ sample( Goal ) :-
      Succ \== fail,
      Prb =\= 0.
 
-% scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
-
 /** sample(+Goal, +Eps, -Path, -Succ, -Prb ).
 
 True iff Goal is a stochastic goal that can be sampled from the stachastic clauses in memory.
@@ -105,6 +103,9 @@ True iff Goal is a stochastic goal that can be sampled from the stachastic claus
 Eps is the epsilon value below which a derivation is considered a failure (prunes low probability branches).
 Path is the arithmetic index of the clauses used in the derivation. Succ is bound to =|false|= if this was
 a failure branch and is unbound otherwise. Prb is the probability of the sampled branch.
+
+This predicate implements probabilistic sampling. Instead of SLD resolution we use the probabilistic 
+labels to sample from the tree. There is no backtracing, and probabilistic failures will be returned.
 
 ==
 ?- sload_pe(coin).

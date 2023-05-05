@@ -451,74 +451,10 @@ sload_pe( Files, InOptions ) :-
      bb_put( cc, CC ),
      bb_put( current_slp, Files ).
 
-/** scall( Goal ).
-
-Succeeds for all instantiations for which stochastic Goal has a successful derivation. 
-
-==
-?- sload_pe(coin).
-?- seed_pe.
-?- scall(coin(Flip)).
-Flip = head ;
-Flip = tail.
-
-?- scall(doubles(X)).
-X = head ;
-X = tail.
-==
-
-@see scall/6
-
-*/
-scall( Goal ) :-
-     % Eps is 1E-10,
-     % scall_1( sample, Goal, Eps, _Path, Succ, _Prb ), 
-     scall_1( all, Goal, 0, _Path, Succ, _Prb ),
-     Succ \== fail. % fixme: or false ?
-
-/*
-scall( Goal, Prb ) :-
-     % Eps is 1E-10,
-     % scall_1( sample, Goal, Eps, _Path, Succ, _Prb ), 
-     scall_1( all, Goal, 0, _Path, Succ, Prb ),
-     Succ \== fail. % fixme: or false ?
-     */
 
 scall( Goal, Path, Succ, Prb ) :-
      scall_1( all, Goal, 0, Path, Succ, Prb ). 
 
-/** scall( +Goal, -Prb ).
-
-True iff Goal is a stochastic goal and is sampled with probability Prb.
-
-Succeeds exactly once if it does. Uses scall/6, with Epsilon = 1E-10.
-
-==
-?- sload_pe(coin).
-?- set_random( seed(101) ).
-?- scall( coin(Flip), Prb ).
-Flip = head,
-Prb = 0.5.
-
-
-?- set_random( seed(101) ).
-?- scall( coin(tail), Prb ).
-false.
-
-?- set_random( seed(101) ).
-?- scall( coin(head), Prb ).
-Prb = 0.5.
-
-==
-
-@author nicos angelopoulos
-@version  0:1 2023/05/04
-
-*/
-scall( Goal, Prb ) :-
-     Eps is 1E-10,
-     scall_1( sample, Goal, Eps, _Path, Succ, Prb ),
-     Succ \== fail. % fixme: or false ?
 
 /** scall( Goal, Eps, Meth, Path, Succ, Prb ).
 

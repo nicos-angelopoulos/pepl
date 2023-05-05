@@ -104,6 +104,56 @@ scall( Goal ) :-
      scall_1( all, Goal, 0, _Path, Succ, _Prb ),
      Succ \== fail. % fixme: or false ?
 
+
+/** scall( +Goal, -Prb ).
+
+Succees for derivation of stochastic Goal having branch probabilitiy Prb.
+
+Succeeds for all instantiations for which stochastic Goal has a successful derivation, with Prb 
+being the product of all probabilitic labels seen on the way.
+
+This uses standard SLD resolution so the order is as per Prolog.
+Failure paths are ignored here.
+
+==
+?- sload_pe(coin).
+?- scall( coin(Flip), Prb ).
+Flip = head,
+Prb = 0.5 ;
+Flip = tail,
+Prb = 0.5.
+
+?- scall( coin(head), Prb ).
+Prb = 0.5 ;
+false.
+
+?- scall( coin(tail), Prb ).
+Prb = 0.5.
+==
+
+Also,
+==
+?- scall( doubles(X), Prb ).
+X = head,
+Prb = 0.25 ;
+X = tail,
+Prb = 0.25.
+==
+
+Compare to
+==
+?- scall_findall( doubles(X), Pairs ).
+Pairs = [head-0.25, fail-0.25, fail-0.25, tail-0.25].
+==
+
+@author nicos angelopoulos
+@version  0:1 2023/05/04
+
+*/
+scall( Goal, Prb ) :-
+     scall_1( all, Goal, 0, _Path, Succ, Prb ),
+     Succ \== fail.
+
 scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
      expand_sgoal( Goal, Spec, ClId, PrIn, Eps, sample, Path, Succ, Prb, ExpG ),
      rc( top_sample, Spec, ClId, PrIn ),
@@ -111,6 +161,8 @@ scall_1( sample, Goal, Eps, Path, Succ, Prb ) :-
           % added in June 2001, for case when top sampling goal
           % is a non-stochastic one.
      !.
+
+
 
 % scall_1( all, Goal, Eps, Path, Succ, Prb ) :-
 scall_1( Other, Goal, Eps, Path, Succ, Prb ) :-

@@ -3,8 +3,9 @@
                      IFACE:  seed_pe/0 in new file src/seed_pe.pl
                      SLP:    slp/doubles.slp, demos dead probability
                      IFACE:  scall_sum/2, scall_findall/2, allow X-Goal in 1st argument
-                     CHANGE: scall/1 this is now non-sampling
-                     scall/, scall/, 
+                     CHANGE: scall/1, this is now non-sampling
+                     IFACE:  scall/2, adds probability of derivation 
+                     CHANGE: scall/6 -> scall/5, completes separation of scall_?/N and sample/M preds
 
 2.2                  @ 2022/01/02
     @ 2022/01/02     CHANGED  reporting of loading via print_message/2
