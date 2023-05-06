@@ -91,7 +91,7 @@ Probabilistic inference predicates
 
 @author Nicos Angelopoulos
 @license This software is distributed under the MIT licence
-@version 2.3, 2023/5/5, added extensive sampling and inference support
+@version 2.3, 2023/5/6, added extensive sampling and inference support
 @version 2.2, 2022/1/2
 @version 2.1, 2017/2/25
 @version 2.0.6, 2014/01/28 
@@ -133,11 +133,11 @@ Pepl's current Version (Maj:Min:Fix) and publication date (date(Year,Month,Day))
 ==
 ?- pepl_version(V,D).
 V = 2:3:0,
-D = date(2021, 5, 5).
+D = date(2021, 5, 6).
 ==
 
-@version 2:3:0 2023/05/05
+@version 2:3:0 2023/05/06
 @version 2:2:0 2021/01/01
 
 */
-pepl_version( 2:3:0, date(2023,5,5) ).
+pepl_version( 2:3:0, date(2023,5,6) ).

@@ -34,10 +34,13 @@ If you have packs: mlu, b_real and Real.
 ?- seed_pe.
 ?- mlu_sample( sample(coin(Side)), 100, Side, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
-
 Freqs = [head-53, tail-47].
 ==
-Produces file: real_plot.svg which contains the barplot for 53 heads and 47 tails from 100 coin flipping experiments.
+Produces file: real_plot.svg
+
+which contains the barplot for 53 heads and 47 tails from 100 coin flipping experiments.
+
+[[doc/html/images/real_plot.svg]]
 
 Note that sampling is distinct to calling a Goal for finding its refutations and total probabilities.
 Sampling always takes the most general form of Goal and also returns failure paths. The idea is that 
@@ -72,18 +75,17 @@ Produces file: meb3from3.png
 
 ...and: 
 ==
+?- lib(mlu).
+?- sload_pe(member3).
 ?- seed_pe.
 ?- mlu_sample( sample(member3(X,[a,b,c,d,e,f,g,h])), 100, X, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ),
    write( freqs(Freqs) ), nl.
-
 freqs([a-34,b-16,c-22,d-5,e-9,f-6,fail-2,g-3,h-3])
 ==
 Produces file: meb3from8.png
 
 [[doc/html/images/meb3from8.png]]
-
-==
 
 @author nicos angelopoulos
 @version  0:1 2023/05/04
