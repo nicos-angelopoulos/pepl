@@ -31,10 +31,10 @@ If you have packs: mlu, b_real and Real.
 ==
 ?- lib(mlu).
 ?- sload_pe(coin).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- mlu_sample( scall(coin(Side)), 100, Side, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
-
+resolution_pe
 Freqs = [head-53, tail-47].
 ==
 Produces file: real_plot.svg which contains the barplot for 53 heads and 47 tails from 100 coin flipping experiments.
@@ -46,13 +46,13 @@ proportionaly and failed branches are integral part of the space.
 
 The above is particularly important if Goal is partially instantiated.
 ==
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(tail)).
 false.
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(head)).
 true.
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(Flip)).
 Flip = head.
 ==
@@ -109,7 +109,7 @@ labels to sample from the tree. There is no backtracing, and probabilistic failu
 
 ==
 ?- sload_pe(coin).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(Flip),0,Path,Succ,Prb).
 Flip = head,
 Path = [1],
@@ -126,16 +126,16 @@ proportionaly and failed branches are integral part of the space.
 
 The above is particularly important if Goal is partially instantiated.
 ==
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(tail),0,Path,Succ,Prb).
 Path = [1],
 Succ = fail,
 Prb = 0.5.
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(head),0,Path,Succ,Prb).
 Path = [1],
 Prb = 0.5
-?- set_random(seed(101)).
+?- seed_pe.
 ?- sample(coin(Flip),0,Path,Succ,Prb).
 Flip = head,
 Path = [1],
