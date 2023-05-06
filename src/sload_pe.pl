@@ -6,14 +6,14 @@
 %   of sload_pe/2.
 
 :- ensure_loaded(init_lib).                     % library/1.
-:- ensure_loaded(library(slp_file_location)).   % /2.
+:- ensure_loaded(slp_file_location).            % /2.
+:- ensure_loaded(expand_sgoal).                 % /2, /10.
 :- ensure_loaded(library(read_terms_cons)).     % /5.
 :- ensure_loaded(library(portray_clauses_on)).  % /2.
 :- ensure_loaded(library(flatten_nv)).          % flatten_nv/2.
 :- ensure_loaded(library(kvsi_till_left_incl)). % /3.
 :- ensure_loaded(library(kvsi_val_w_right_rem)).% /3.
 :- ensure_loaded(library(mold_vars_list)).      % /2.
-:- ensure_loaded(library(expand_sgoal)).        % /2, /10.
 :- ensure_loaded(library(options_cohesion)).    % /3.
 :- ensure_loaded(library(is_list_of_n_vars)).   % /2.
 
@@ -510,7 +510,7 @@ body_expand( call(A), Pin, Eps, Sel, AllPaths, Succ, Pout, ExpCall ) :-
           ( Qual == s ->
                %% ExpCall = (user:scall_1( Sel, Cable, Eps, AllPaths, Succ, ScPrb ),Pout is Pin * ScPrb)
                %% bb_get( pepl_module, LdMod ),
-               ExpCall = (scall_1( Sel, Cable, Eps, AllPaths, Succ, ScPrb ),Pout is Pin * ScPrb)
+               ExpCall = (resolution_pe( Sel, Cable, Eps, AllPaths, Succ, ScPrb ),Pout is Pin * ScPrb)
                     % scall_1( all, Goal, Eps, Path, Succ, Prb ) :-
                ;
                %% ExpCall = (user:ns_call_1( Cable, Eps, Sel, Pin, AllPaths, Succ, Pout))

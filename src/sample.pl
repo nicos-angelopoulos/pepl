@@ -32,7 +32,7 @@ If you have packs: mlu, b_real and Real.
 ?- lib(mlu).
 ?- sload_pe(coin).
 ?- set_random(seed(101)).
-?- mlu_sample( scall(coin(Side)), 100, Side, Freqs ), 
+?- mlu_sample( scall(coin(Side)), 100, Side, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
 
 Freqs = [head-53, tail-47].
@@ -74,7 +74,7 @@ Produces file: meb3from3.png
 ==
 ?- seed_pe.
 ?- mlu_sample( sample(member3(X,[a,b,c,d,e,f,g,h])), 100, X, Freqs ),
-   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ).
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs(png),stem('meb3from8'),las=2] ),
    write( freqs(Freqs) ), nl.
 
 freqs([a-34,b-16,c-22,d-5,e-9,f-6,fail-2,g-3,h-3])

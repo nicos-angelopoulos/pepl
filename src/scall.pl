@@ -35,7 +35,7 @@ Prb = 0.5.
 
 */
 scall_sum( Goal, Prb ) :-
-     findall( DrvPrb, scall_1( all,Goal,0,_Path,true,DrvPrb), DPrbs ),
+     findall( DrvPrb, resolution_pe( all,Goal,0,_Path,true,DrvPrb), DPrbs ),
      sum_list( DPrbs, Prb ).
 
 /** scall_findall( +Goal, -Pairs ).
@@ -101,7 +101,7 @@ Pairs = [head-0.25, fail-0.25, fail-0.25, tail-0.25].
 
 */
 scall( Goal ) :-
-     scall_1( all, Goal, 0, _Path, Succ, _Prb ),
+     resolution_pe( all, Goal, 0, _Path, Succ, _Prb ),
      Succ \== fail. % fixme: or false ?
 
 
@@ -151,7 +151,7 @@ Pairs = [head-0.25, fail-0.25, fail-0.25, tail-0.25].
 
 */
 scall( Goal, Prb ) :-
-     scall_1( all, Goal, 0, _Path, Succ, Prb ),
+     resolution_pe( all, Goal, 0, _Path, Succ, Prb ),
      Succ \== fail.
 
 
