@@ -3,7 +3,8 @@
 
 Set random seed to a standard location.
 
-A convenince predicate for running the examples from a common starting point.
+A convenience predicate for running the examples from a common starting point for the random seed.
+
 Specifically it unfolds to
 ==
 ?- set_random(seed(101)).
