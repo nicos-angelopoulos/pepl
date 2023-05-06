@@ -9,12 +9,13 @@ of failure of the non failure version (see member3.pl.
 ==
 ?- lib(mlu).
 ?- sload_pe(member3_nf).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- mlu_sample(scall(member3_nf(X,[a,b,c])), 100, X, Freqs).
 Freqs = [a-26, b-26, c-48].
 
-?- set_random(seed(101)).
-?- mlu_sample(scall(member3_nf(X,[a,b,c,e,d,f,g,h,i,j,k,l])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot)]), write(Freqs), nl.
+?- seed_pe.
+?- mlu_sample(scall(member3_nf(X,[a,b,c,e,d,f,g,h,i,j,k,l])), 100, X, Freqs ),
+   mlu_frequency_plot( Freqs, [interface(barplot)]), write(Freqs), nl.
 [a-27,b-28,c-18,d-9,e-8,f-4,g-3,i-2,k-1]
 ==
 
