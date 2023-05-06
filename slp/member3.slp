@@ -3,10 +3,11 @@
 Demonstrating the limitation of recursion in SLPs.
 
 ==
-?- lib( mlu ).
-?- sload_pe( member3 ).
-?- mlu_sample( scall(member(X,[a,b,c])), 100, X, Freqs ).
-?- mlu_sample( scall(member3(X,[a,b,c,e,d,f,g,h,i,j,k,l])), 100, X, Freqs ), mlu_frequency_plot( Freqs, [interface(barplot)] ).
+?- lib(mlu).
+?- sload_pe(member3).
+?- mlu_sample(scall(member(X,[a,b,c])), 100, X, Freqs).
+?- mlu_sample(scall(member3(X,[a,b,c,e,d,f,g,h,i,j,k,l])), 100, X, Freqs),
+   mlu_frequency_plot(Freqs, [interface(barplot)]).
 ==
 
 */
