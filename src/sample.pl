@@ -32,7 +32,7 @@ If you have packs: mlu, b_real and Real.
 ?- lib(mlu).
 ?- sload_pe(coin).
 ?- seed_pe.
-?- mlu_sample( scall(coin(Side)), 100, Side, Freqs ),
+?- mlu_sample( sample(coin(Side)), 100, Side, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
 Freqs = [head-53, tail-47].
 ==
