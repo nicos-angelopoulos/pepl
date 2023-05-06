@@ -34,6 +34,7 @@ If you have packs: mlu, b_real and Real.
 ?- seed_pe.
 ?- mlu_sample( sample(coin(Side)), 100, Side, Freqs ),
    mlu_frequency_plot( Freqs, [interface(barplot),outputs([svg]),las=2] ).
+
 Freqs = [head-53, tail-47].
 ==
 Produces file: real_plot.svg which contains the barplot for 53 heads and 47 tails from 100 coin flipping experiments.
