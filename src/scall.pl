@@ -5,7 +5,7 @@ Prb is the sum of probabilities for all refutations of Goal- which should be a s
 
 ==
 ?- sload_pe(coin).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- scall_sum( coin(Flip), Prb ).
 Prb = 1.0.
 
@@ -172,7 +172,7 @@ The predicate arguments are as follows.
 
 ==
 ?- sload_pe(coin).
-?- set_random(seed(101)).
+?- seed_pe.
 ?- scall(coin(Flip), 0, sample, Path, Succ, Prb ).
 Flip = head,
 Path = [1],
