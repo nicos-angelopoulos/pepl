@@ -63,7 +63,7 @@ See
 ### SLD-based probabilisic inference
 
 These predicates allow standard SLD exploration of a stochastic query against an SLP. Predicates here
-allows to explore what is derivable and often attach a probability and ather information to each derivation.
+allow to explore what is derivable and often attach a probability and ather information to each derivation.
 
 Note that in probabilistic inference we often are more interested in failures than in standard LP. 
 This is because there is a probability mass loss which each failed probabilistic branch.
