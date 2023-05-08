@@ -54,7 +54,7 @@ of all the probabilities attached to resolution steps during the derivation.
 
 For very deep probabilistic programs, it is sometimes useful to but a minimum value of probability
 we are interested in. This is a way to shorten the search space without losing significant amounts
-of probility mass (see second argument of sample/5).
+of probability mass (see second argument of sample/5).
 
 See
   * sample/1
